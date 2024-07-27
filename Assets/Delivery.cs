@@ -9,7 +9,7 @@ public class Delivery : MonoBehaviour
     [SerializeField] float destroyDelay = 0.5f;
     [SerializeField] Color noPackage = Color.white;
 
-    SpriteRenderer spriteRenderer;
+    SpriteRenderer spriteRenderer; // better practice probably
 
     private void Start()
     {

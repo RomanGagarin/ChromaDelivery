@@ -9,7 +9,7 @@ public class Driver : MonoBehaviour
     [SerializeField] float steerSpeed = 250f;
     [SerializeField] float slowSpeed = 10f;
     [SerializeField] float boostSpeed = 25f;
-    float defaultSpeed;
+    float defaultSpeed = 15f;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +27,6 @@ public class Driver : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        defaultSpeed = moveSpeed;
         moveSpeed = slowSpeed;
 
     }
@@ -40,16 +39,18 @@ public class Driver : MonoBehaviour
     {
         if(collision.tag == "Boost")
         {
-            defaultSpeed = moveSpeed;
-            moveSpeed = boostSpeed;
+            StartCoroutine(Boost());
         }
         
     }
-    void OnTriggerExit2D(Collider2D collision)
+
+    IEnumerator Boost()
     {
-        if (collision.tag == "Boost")
-        {
-            moveSpeed = defaultSpeed;
-        }
+        Debug.Log("Boost Start");
+        moveSpeed = boostSpeed;
+        yield return new WaitForSeconds(3);
+        Debug.Log("Boost End");
+        moveSpeed = defaultSpeed;
+
     }
 }
